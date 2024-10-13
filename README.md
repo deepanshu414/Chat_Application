@@ -1,6 +1,6 @@
 <div align="center">
    <div>
-      <img src="https://socialify.git.ci/deepanshu414/ChatterBox/image?forks=1&issues=1&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Auto" alt="ChatterBox" width="640" height="320" />
+      <img src="https://socialify.git.ci/deepanshu414/Chat_Application/image?forks=1&issues=1&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Auto" alt="Chat_application" width="640" height="320" />
    </div>
    <br>
    
