@@ -153,7 +153,6 @@ def ai():
     return render_template('ai_index.html')
 @app.route('/chat_ai', methods=['GET', 'POST'])
 def chat_ai():
-    # apikey='AIzaSyChm6p9vwr24nt3ouDzJgrzedXiCpjWzM0'
     with open("apikey.txt",'r') as file:
         apikey=file.read()
     genai.configure(api_key=apikey)
