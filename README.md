@@ -64,6 +64,12 @@ ChatterBox is a real-time chat application designed for seamless communication b
 
 ---
 
+## Demo
+
+[![demo]](https://github.com/user-attachments/assets/40b68703-631e-4ab1-86c7-8e958eac3270)
+
+---
+
 ## Project Details
 
 The ChatterBox project is an ambitious endeavor to create a real-time chat application. This section delves into the intricate details of the project, outlining the technical specifications, design considerations, and the developmental approach. Our goal is to provide a comprehensive overview of the project's scope, including its features, architecture, and the technologies employed.
