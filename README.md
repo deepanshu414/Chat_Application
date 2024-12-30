@@ -61,7 +61,14 @@ Meet our amazing contributors:
 
 ## Overview
 
-ChatterBox is a real-time chat application designed for seamless communication between users. It features instant messaging, media sharing, and real-time notifications to ensure fluid conversations. The front end is built with HTML, CSS, and JavaScript, while the back end uses Flask, MongoDB, and Python. User authentication and administrative controls ensure data privacy and security. This project aims to provide a reliable and user-friendly platform for instant communication.
+I have rebranded my project from ChatterBox to RealXTalk to better align with its purpose and functionality. In addition to the core features such as real-time messaging, media sharing, and instant notifications, I have introduced several new enhancements:
+1. **Advanced Search Functionality:**  Users can now search messages, files, and users efficiently within the application.
+2. **Customizable Themes:** RealXTalk offers multiple themes for a personalized chat experience.
+3. **Group Chat Enhancements:** Features such as pinned messages, admin controls, and read receipts in group chats have been added.
+4. **End-to-End Encryption:** To strengthen data privacy, all messages and media are now encrypted.
+5. **User Activity Status:** Displays active, away, and offline status for users in real time.
+   
+These updates make RealXTalk a more feature-rich, secure, and user-focused communication platform.
 
 ---
 
