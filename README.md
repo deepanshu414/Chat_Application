@@ -46,6 +46,7 @@ Meet our amazing contributors:
 ## Table of Contents
 
 - [Overview](#overview)
+- [Demo](#demo)
 - [Project Details](#project-details)
 - [Module Description](#module-description)
    - [User Authentication Module](#user-authentication-module)
