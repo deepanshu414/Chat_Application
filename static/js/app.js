@@ -32,11 +32,11 @@ ask_btn.addEventListener("click", async () => {
     user_question.innerText = query
     user_query.append(user_avatar_div, user_question)
 
-    // FlaskGem/Gemini part
+    //Gemini part
     let gemini_response = document.createElement('div')
     gemini_response.setAttribute('class', 'gemini')
     let gemini_avatar_div = document.createElement('div')
-    gemini_avatar_div.innerHTML = `<img class="avatar" src="static/main_images/flask_gem_avatar.png"/> <span>FlaskGem</span>`
+    gemini_avatar_div.innerHTML = `<img class="avatar" id="image" src="static/main_images/robot.webp"/> <span title="From the Latin 'omnis,' meaning all or everything. Suggests comprehensive knowledge">Omnis</span>`
     let gemini_ans = document.createElement('p')
     gemini_ans.innerHTML = "<div id='loading_div'>Generating your content<span id = 'loading'></span></div>"
     gemini_response.append(gemini_avatar_div, gemini_ans)
@@ -56,6 +56,7 @@ ask_btn.addEventListener("click", async () => {
         // query_array_7_48 contains all the chats
         // if query_array_7_48 is present, get it & push the new query
         // else create query_array_7_48 with the first query
+        
         if (sessionStorage.getItem("query_array_7_48")) {
             let queries = JSON.parse(sessionStorage.getItem("query_array_7_48"))
             queries.push(new_query.outerHTML)
@@ -63,6 +64,7 @@ ask_btn.addEventListener("click", async () => {
         } else {
             sessionStorage.setItem("query_array_7_48", JSON.stringify([new_query.outerHTML]))
         }
+        
     }, 0)  // This part is important to block this line execution upto all the synchronous part is executed
 
 })
@@ -72,10 +74,8 @@ text_area.addEventListener("keydown", (event) => {
         ask_btn.click()
     }
 })
-
 window.addEventListener("load", () => {
     let whole_html = ""
-
     // retrieve the array and take all the queries that was stored, then use it
     if (sessionStorage.getItem("query_array_7_48")) {
         let queries = JSON.parse(sessionStorage.getItem("query_array_7_48"))
@@ -83,6 +83,11 @@ window.addEventListener("load", () => {
             whole_html += query
         }
     }
-    all_chats.innerHTML = whole_html
-
+    all_chats.innerHTML = whole_html;
+    function scrollall(){
+        let chats = document.querySelector('.chats');
+        chats.scrollTop = chats.scrollHeight;
+        clearInterval(ineterval);
+    }
+    const ineterval=setInterval(scrollall, 20); 
 })

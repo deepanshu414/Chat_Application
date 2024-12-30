@@ -150,10 +150,9 @@ async function loadFile(key,filename) {
     const extension = filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2).toLowerCase();
     let currentuserid = sessionStorage.getItem("current_user_id");
     if (extensions.includes("." + extension)) {
-        // if (isTextFile("." + extension)) {
-        //     await handleTextFile(currentuserid,key,filename);
-        // }
-        if ([".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"].includes("." + extension)) {
+        if (isTextFile("." + extension)) {
+            await handleTextFile(currentuserid,key,filename);
+        } else if ([".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"].includes("." + extension)) {
             await handleImageFile(currentuserid,key,filename);
         } else if ([".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv", ".webm"].includes("." + extension)) {
             await handleVideoFile(currentuserid,key,filename);
@@ -224,6 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let result = splitFirstColon(mes);
                 key=result.beforeColon;
                 value=result.afterColon;
+                // let secretKey ="deepanshu123453424fs3fsfd4f"
+                // value=decryptdata(en_value,secretKey)
+                console.log(value);
                 key = key.replace(/"/g, '');
                 value = value.replace(/"/g, '');
                 let ccount=currentuserid.length;
@@ -253,7 +255,31 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(fetchCount, 1000); 
 });
 
+function encryptdata(userdata,secretKey){
+    if (typeof userdata !== 'string') {
+        userdata = JSON.stringify(userdata);
+    }
+    let encrypted = CryptoJS.AES.encrypt(userdata, secretKey).toString()
+    return encrypted;
+}
+function decryptdata(userdata,secretKey){
+    let decrypted = CryptoJS.AES.decrypt(userdata, secretKey).toString(CryptoJS.enc.Utf8);
+    return decrypted;
+    // try {
+    //     // Decrypt the data
+    //     let bytes = CryptoJS.AES.decrypt(userdata, secretKey);
+    //     console.log(bytes);
+    //     let decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+        
+    //     // Log the decrypted data
+    //     console.log("Decrypted Data:", decryptedData);
 
+    //     return decryptedData;
+    // } catch (error) {
+    //     console.error("Error decrypting data:", error.message);
+    //     return null;
+    // }
+}
 async function writeJsonToFile(filename, data) {
     try {
         const response = await fetch(`/write-json/${filename}`, {
@@ -295,13 +321,44 @@ async function fetchAndCountJsonEntries(filename) {
         return 0;
     }
 }
-
+async function get_response(query) {
+    let response = await fetch("/chat_ai", {
+        headers: {
+            'Content-type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ query })
+    })
+    return response.json()
+}
 async function useEntryCount(filename,currentuserid,usemessage) {
     try {
         const count = await fetchAndCountJsonEntries(filename);
         const completeuserid="user"+count+currentuserid;
+        let message='';
+        if (usemessage.startsWith("@ai ") || usemessage.startsWith("@AI ") || usemessage.startsWith("@aI ") || usemessage.startsWith("@Ai ")) {
+            const main_message = usemessage.slice("@ai ".length);
+            let val='';
+            val=await get_response(main_message);
+            let regex = new RegExp("\n", 'gi'); // 'gi' makes it case-insensitive
+            val = val.replace(regex, "<br>");
+            message=val;
+        }
+        else if (usemessage.startsWith("@ai_show ") || usemessage.startsWith("@AI_show ") || usemessage.startsWith("@aI_show ") || usemessage.startsWith("@Ai_show ")) {
+            const main_message = usemessage.slice("@ai ".length);
+            let val='';
+            val=await get_response(main_message);
+            let regex = new RegExp("\n", 'gi'); // 'gi' makes it case-insensitive
+            val = val.replace(regex, "<br>");
+            message=usemessage+"<br><br>"+val;
+        }
+        else{
+            message=usemessage
+        }
+        // let secretKey ="deepanshu123453424fs3fsfd4f"
+        // main_user_data=encryptdata(message,secretKey)
         const data={
-            [completeuserid]:usemessage
+            [completeuserid]:message
         };
         writeJsonToFile(filename, data);
     } catch (error) {
@@ -348,6 +405,8 @@ async function fetchAndIterateJson(filename) {
                     sent_div.innerHTML = value;
                 }
             }
+            let chats = document.querySelector('.chat-messages');
+            chats.scrollTop = chats.scrollHeight;
         });
     } catch (error) {
         console.error('Error fetching or iterating over JSON data:', error);
@@ -428,6 +487,10 @@ sub.addEventListener("click", () => {
 })
 
 window.addEventListener('load', () => {
+    let chats = document.querySelector('.chat-messages');
+    chats.scrollTop = chats.scrollHeight;
+});
+document.addEventListener('DOMContentLoaded', () => {
     let chats = document.querySelector('.chat-messages');
     chats.scrollTop = chats.scrollHeight;
 });

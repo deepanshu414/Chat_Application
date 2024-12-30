@@ -17,7 +17,7 @@ sub.addEventListener("click", () => {
     let chats = document.querySelector('.chats');
     chats.scrollTop = chats.scrollHeight;
 })
-window.addEventListener('load', () => {
+document.addEventListener('load', () => {
     let chats = document.querySelector('.chats');
     chats.scrollTop = chats.scrollHeight;
 });

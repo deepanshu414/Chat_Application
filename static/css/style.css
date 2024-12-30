@@ -455,9 +455,9 @@ display: none;
     text-transform: capitalize;
     font-family: emoji
 }
-.container .chat-header #screenshare{
+.container .chat-header #screenshare,#videocall{
     float: right;
-    margin-right: 10px;
+    margin-right: 20px;
     font-size: large;
 }
 .container .chat-messages {
@@ -466,8 +466,10 @@ display: none;
     display: flex;
     flex-direction: column;
     -ms-overflow-style: none;
-    padding: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
 }
+
 .container .chat-messages::-webkit-scrollbar {
     display: none;
     }
@@ -576,6 +578,9 @@ align-items: center;
 justify-content: center;
 position: relative;
 }
+.fileUploadWrapper {
+    margin-right: 8px;
+}
 .fileUploadWrapper label svg {
 height: 18px;
 }
@@ -611,11 +616,10 @@ border-radius: 5px;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
 transition: all 0.3s;
 }
-.container .input-area #cmsg #send-button,.container .input-area #cmsg #mic-button,.container .input-area #cmsg #plus-button {
-    /* background-color: #075e54;
-    color: #fff; */
+.container .input-area #cmsg #send-button,.container .input-area #cmsg #mic-button {
     border: none;
-    padding: 5px 10px;
+    padding:6px;
     border-radius: 20px;
     cursor: pointer;
+    transform: translateY(4px);
 }

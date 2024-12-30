@@ -17,28 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Element with id 'searchInput' not found");
     }
 });
-    // function handleClick(event){
-    //     let main_user=document.getElementById("hide1").value;
-    //     let clickedDiv = event.target.closest('.users-list');
-    //     let hiddenInputValue = clickedDiv.querySelector('#hide').value;
-    //     let currenusername = clickedDiv.querySelector('#username').innerHTML;
-    //     sessionStorage.setItem("current_user_id",hiddenInputValue);
-    //     sessionStorage.setItem("current_user_name",currenusername);
-    //     fetch('/message', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ value: hiddenInputValue +"."+main_user}),
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log('Response from Flask:', data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error sending data to Flask:', error);
-    //     });
-    // }
 function handleClick(event){
     let clickedDiv = event.target.closest('.users-list');
     let currentuserid = clickedDiv.querySelector('#hide').value;
@@ -77,6 +55,7 @@ function logout(){
     sessionStorage.removeItem("main_user_name");
     sessionStorage.removeItem("current_user_id");
     sessionStorage.removeItem("current_user_name");
+    sessionStorage.removeItem("query_array_7_48");
     sessionStorage.removeItem("current_user_image");
 }
 function inputshow(){
@@ -104,14 +83,3 @@ function notinputshow(){
     search.style.display="inline-block";
     cross.style.display="none";
 }
-// function fetchUserId() {
-//     fetch('/get_user_id')
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('User IDs:', data);
-//             // You can do something with the data here
-//         })
-//         .catch(error => console.error('Error fetching user ID:', error));
-// }
-// // Fetch user ID every second
-// setInterval(fetchUserId, 1000);

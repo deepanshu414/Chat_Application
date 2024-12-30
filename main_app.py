@@ -10,6 +10,8 @@ import google.generativeai as genai
 from markdown import markdown
 import requests
 import webview
+with open("static/project_name.txt", "r") as file:
+    project_name = file.read().strip()
 def access_value(number):
     number_str = str(number)
     parts = number_str.split('.')
@@ -88,22 +90,22 @@ def get_user_info(email,password,fname,lname):
     main_list=[getusername, getuserimage,list_1,main_user_id,main_user_lastname]
     return main_list
 app = Flask(__name__)
-window= webview.create_window("Chatterbox",app)
+window= webview.create_window(project_name,app)
 UPLOAD_FOLDER = os.path.join(app.root_path, 'log_file/read_files')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.route('/')
 def index():
     get_user_id()
-    return render_template('index.html')
+    return render_template('index.html',project=project_name)
 @app.route('/signin', methods=['POST'])
 def signin():
-    return render_template('index.html')
+    return render_template('index.html',project=project_name)
 @app.route('/login', methods=['POST'])
 def login():
-    return render_template('login.html')
+    return render_template('login.html',project=project_name)
 @app.route('/logout', methods=['POST'])
 def logout():
-    return render_template('index.html')
+    return render_template('index.html',project=project_name)
 @app.route('/data', methods=['POST'])
 def userdata():
     try:
@@ -124,35 +126,36 @@ def userdata():
         if(c_email=="t"):
             pass
         else:
-            return render_template('index.html',result="Wrong syntax for email") 
+            return render_template('index.html',result="Wrong syntax for email",project=project_name) 
         if file_extension in ['jpg', 'jpeg','png']:
             pass
         else:
-            return render_template('index.html',result="Image should be jpg,png,jpeg,png") 
+            return render_template('index.html',result="Image should be jpg,png,jpeg,png",project=project_name) 
         complete_filename=str(file_name)+"."+str(file_extension)
         folder = 'static\\images'
         file_path = os.path.join(folder, complete_filename)
         ctime=datetime.datetime.now()
         verify=data_check_into_database(fname,lname,email,password)
         if verify =="t":
-            return render_template('index.html',result="Already Created") 
+            return render_template('index.html',result="Already Created",project=project_name) 
         elif verify=="f":
             store_check=store_data(user_id,fname,lname,email,password,file_path,ctime)
             if(store_check=="success"):
                 image.save(file_path) 
                 find_user_name=get_user_info(email,password,fname,lname)
-                return render_template('home.html',result=find_user_name)
+                return render_template('home.html',result=find_user_name,project=project_name)
             else:
-                return render_template('index.html',result=store_check) 
+                return render_template('index.html',result=store_check,project=project_name) 
         else:
-            return render_template('index.html',result=verify) 
+            return render_template('index.html',result=verify,project=project_name) 
     except Exception as e:
-        return render_template('index.html',result="Error: " + str(e)) 
+        return render_template('index.html',result="Error: " + str(e),project=project_name) 
 @app.route('/ai', methods=['GET'])
 def ai():
-    return render_template('ai_index.html')
+    return render_template('ai_index.html',project=project_name)
 @app.route('/chat_ai', methods=['GET', 'POST'])
 def chat_ai():
+    # apikey='Your API key here'
     with open("apikey.txt",'r') as file:
         apikey=file.read()
     genai.configure(api_key=apikey)
@@ -178,10 +181,10 @@ def chat_ai():
                 return jsonify("API Key is not validation.")
         return jsonify(markdown(gemini_response))
     else:
-        return render_template("chats.html")
+        return render_template("chats.html",project=project_name)
 @app.route('/message', methods=['GET'])
 def message():
-    return render_template('messager.html')
+    return render_template('messager.html',project=project_name)
 @app.route('/check-file/<filename>', methods=['GET'])
 def check_file(filename):
     file_path = os.path.join("log_file", filename)
@@ -374,14 +377,14 @@ def checkdata():
     verify_value=data_check_into_database(fname,lname,email,password)
     if verify_value=="t":
         find_user_name=get_user_info(email,password,fname,lname)
-        return render_template('home.html',result=find_user_name)
+        return render_template('home.html',result=find_user_name,project=project_name)
     elif verify_value=="f":
-        return render_template('login.html', result="Wrong email or password...")
+        return render_template('login.html', result="Wrong email or password...",project=project_name)
     else:
-        return render_template('login.html', result=verify_value)
-@app.route('/chatterbox', methods=['GET'])
-def chatterbox():
-    return render_template('chatterbox.html')
+        return render_template('login.html', result=verify_value,project=project_name)
+@app.route('/feedback')
+def feedback():
+    return render_template('feedback.html',project=project_name)
 def get_file_count(folder):
     return len([name for name in os.listdir(folder) if os.path.isfile(os.path.join(folder, name))])
 @app.route('/upload', methods=['POST'])
@@ -409,5 +412,5 @@ def ser_file(filename):
     return send_from_directory('log_file/read_files', filename)
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    webview.start()
+    app.run(debug=True,host='0.0.0.0', port=5001)
+    # webview.start()

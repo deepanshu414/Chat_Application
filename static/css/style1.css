@@ -242,6 +242,14 @@ div.user img.avatar, div.gemini img.avatar{
     background-color: rgb(28, 27, 27);
     outline: 0.1px solid rgba(255, 255, 255, 0.687);
 }
+img#image {
+    background: none;
+    height: 27px;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+    width: 27px;
+}
 div.user p, div.gemini p {
     overflow-wrap: break-word;
     white-space: normal;

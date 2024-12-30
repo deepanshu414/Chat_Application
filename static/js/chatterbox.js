@@ -13,6 +13,8 @@ function creatediv(message){
     main_divs.appendChild(para);
     let mainDiv = document.getElementById("maincomments");
     mainDiv.appendChild(main_divs);
+    let chats = document.querySelector('.maincomments');
+                chats.scrollTop = chats.scrollHeight;
 }
 window.onload = function() {
     readcomments();
@@ -169,7 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 key=result.beforeColon;
                 value=result.afterColon;
                 value = value.replace(/"/g, '');
-                creatediv(value)
+                creatediv(value);
+                let chats = document.querySelector('.maincomments');
+                chats.scrollTop = chats.scrollHeight;
             })
             .catch(error => console.error('Error fetching second last line:', error));
     }
