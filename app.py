@@ -199,7 +199,7 @@ def ai():
         return jsonify(markdown(gemini_response))
     else:
         return render_template("chats.html",project=project_name)
-@app.route('/realxtalk/message')
+@app.route(f'/{project_name}/message')
 def message():
     return render_template('messager.html',project=project_name)
 @app.route('/check-file/<filename>', methods=['GET'])
