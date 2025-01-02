@@ -27,7 +27,7 @@ ask_btn.addEventListener("click", async () => {
     let user_query = document.createElement('div')
     user_query.setAttribute('class', 'user')
     let user_avatar_div = document.createElement('div')
-    user_avatar_div.innerHTML = `<img class="avatar" src="/static/main_images/person_avatar.png"/> <span>You</span>`
+    user_avatar_div.innerHTML = `<img class="avatar" src="/static/main_images/person.png"/> <span>You</span>`
     let user_question = document.createElement('p')
     user_question.innerText = query
     user_query.append(user_avatar_div, user_question)
@@ -36,7 +36,7 @@ ask_btn.addEventListener("click", async () => {
     let gemini_response = document.createElement('div')
     gemini_response.setAttribute('class', 'gemini')
     let gemini_avatar_div = document.createElement('div')
-    gemini_avatar_div.innerHTML = `<img class="avatar" id="image" src="/static/main_images/robot.webp"/> <span title="From the Latin 'omnis,' meaning all or everything. Suggests comprehensive knowledge">Omnis</span>`
+    gemini_avatar_div.innerHTML = `<img class="avatar" id="image" src="/static/main_images/robot.webp"/><span title="Inspired by 'all' with a smooth and futuristic vibe.">Allora</span>`
     let gemini_ans = document.createElement('p')
     gemini_ans.innerHTML = "<div id='loading_div'>Generating your content<span id = 'loading'></span></div>"
     gemini_response.append(gemini_avatar_div, gemini_ans)
