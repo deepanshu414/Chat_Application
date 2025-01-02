@@ -7,8 +7,8 @@
         <title>{{ project}}</title>
         <link rel="stylesheet" href="{{url_for('static',filename='css/all.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+        <link rel="icon" type="image/jpeg" href="{{url_for('static',filename='main_images/real4.png')}}">
     </head>
-<link rel="icon" type="image/jpeg" href="{{url_for('static',filename='main_images/loginicon.png')}}">
 <body>
 <style>
 img{
@@ -19,8 +19,9 @@ img{
 <div class="wrapper" id="wrapper">
     <section class="form login">
     <header>{{ project}}</header>
-        <form action="./checkdata"  enctype="multipart/form-data" autocomplete="off" method="post">
+        <form action="./realxtalk"  enctype="multipart/form-data" autocomplete="off" method="post">
             <div class="error-txt" id="error-txt"><p>{{ result }}</p></div>
+            <input type="hidden" name="valuecheck" value="1DfE2D4GE2de342Ge3GVE340vioODS31F">
             <div class="name-details">
                 <div class="field input">
                     <input type="text" name="fname" required>
@@ -44,7 +45,7 @@ img{
                     </div>
                 </div>
                 <div class="field button">
-                    <input type="submit" value="Continue to Chat">
+                    <button class="btn">Continue to Chat</button>
                 </div>
         </form>
         <div class="link"><form action="/signin" method="post">Not yet signed up?&nbsp;&nbsp;<input type="submit" value="Signup now"></form></div>

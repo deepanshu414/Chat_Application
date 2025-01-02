@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/all.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/fontstyle.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/root.css')}}">
-    <link rel="shortcut icon" href="{{url_for('static', filename = 'main_images/visionhome.webp')}}" type="image/x-icon">
+    <link rel="icon" type="image/jpeg" href="{{url_for('static',filename='main_images/real4.png')}}">
 </head>
 <body>
     <div class="loader"  id="loading">
@@ -26,12 +26,12 @@
             <p>Where Words and Visuals Flow Together, Seamlessly.</p>
         </div>
         <div id="links">
-            <a href="{{ url_for('chat_ai') }}">
+            <a href="{{ url_for('ai') }}">
             <button class="button1">
                 <div class="icon chat">
                     <i class="fa-solid fa-robot"></i>
                 </div>
-                <p>AI-Powered Text Solutions</p>
+                <p>AI Text Solutions</p>
                 <div class="star-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -148,12 +148,12 @@
                 </div>
             </button>
         </a>
-        <a href="{{ url_for('feedback') }}">
+        <a href="{{ url_for('expressivereact') }}">
                 <button class="button1">
                     <div class="icon image_chat">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <p>Express, React, Interact Freely</p>
+                    <p>Expressive React</p>
                     <div class="star-1">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -106,57 +106,74 @@ def login():
 @app.route('/logout', methods=['POST'])
 def logout():
     return render_template('index.html',project=project_name)
-@app.route('/data', methods=['POST'])
-def userdata():
+@app.route('/realxtalk', methods=['POST'])
+def realxtalk():
+    valuecheck=request.form['valuecheck']
     try:
-        user_id=get_user_id()
-        fname= request.form['fname']
-        lname= request.form['lname']
-        email= request.form['email']
-        password= request.form['password']
-        image = request.files['image']
-        filename = image.filename
-        fname=fname.capitalize()
-        lname=lname.capitalize()
-        email=email
-        password=password.capitalize()
-        file_name=filename.split('.')[0]+str(user_id)
-        file_extension =filename.split('.')[1]
-        c_email=check_email(email)
-        if(c_email=="t"):
-            pass
-        else:
-            return render_template('index.html',result="Wrong syntax for email",project=project_name) 
-        if file_extension in ['jpg', 'jpeg','png']:
-            pass
-        else:
-            return render_template('index.html',result="Image should be jpg,png,jpeg,png",project=project_name) 
-        complete_filename=str(file_name)+"."+str(file_extension)
-        folder = 'static\\images'
-        file_path = os.path.join(folder, complete_filename)
-        ctime=datetime.datetime.now()
-        verify=data_check_into_database(fname,lname,email,password)
-        if verify =="t":
-            return render_template('index.html',result="Already Created",project=project_name) 
-        elif verify=="f":
-            store_check=store_data(user_id,fname,lname,email,password,file_path,ctime)
-            if(store_check=="success"):
-                image.save(file_path) 
+        if(str(valuecheck)=="r3DF3i2IOD31nJ32jE4Ke43FD32F2j0Oe3ws3"):
+            user_id=get_user_id()
+            fname= request.form['fname']
+            lname= request.form['lname']
+            email= request.form['email']
+            password= request.form['password']
+            image = request.files['image']
+            filename = image.filename
+            fname=fname.capitalize()
+            lname=lname.capitalize()
+            email=email
+            password=password.capitalize()
+            file_name=filename.split('.')[0]+str(user_id)
+            file_extension =filename.split('.')[1]
+            c_email=check_email(email)
+            if(c_email=="t"):
+                pass
+            else:
+                return render_template('index.html',result="Wrong syntax for email",project=project_name) 
+            if file_extension in ['jpg', 'jpeg','png']:
+                pass
+            else:
+                return render_template('index.html',result="Image should be jpg,png,jpeg,png",project=project_name) 
+            complete_filename=str(file_name)+"."+str(file_extension)
+            folder = 'static\\images'
+            file_path = os.path.join(folder, complete_filename)
+            ctime=datetime.datetime.now()
+            verify=data_check_into_database(fname,lname,email,password)
+            if verify =="t":
+                return render_template('index.html',result="Already Created",project=project_name) 
+            elif verify=="f":
+                store_check=store_data(user_id,fname,lname,email,password,file_path,ctime)
+                if(store_check=="success"):
+                    image.save(file_path) 
+                    find_user_name=get_user_info(email,password,fname,lname)
+                    return render_template('home.html',result=find_user_name,project=project_name)
+                else:
+                    return render_template('index.html',result=store_check,project=project_name) 
+            else:
+                return render_template('index.html',result=verify,project=project_name)
+        elif(str(valuecheck)=="1DfE2D4GE2de342Ge3GVE340vioODS31F"):
+            fname= request.form['fname']
+            lname= request.form['lname']
+            email= request.form['email']
+            password= request.form['password']
+            verify_value=data_check_into_database(fname,lname,email,password)
+            if verify_value=="t":
                 find_user_name=get_user_info(email,password,fname,lname)
                 return render_template('home.html',result=find_user_name,project=project_name)
+            elif verify_value=="f":
+                return render_template('login.html', result="Wrong email or password...",project=project_name)
             else:
-                return render_template('index.html',result=store_check,project=project_name) 
+                return render_template('login.html', result=verify_value,project=project_name)
         else:
-            return render_template('index.html',result=verify,project=project_name) 
+            return render_template('index.html',result="Error: Storing data",project=project_name) 
     except Exception as e:
         return render_template('index.html',result="Error: " + str(e),project=project_name) 
-@app.route('/ai', methods=['GET'])
-def ai():
+@app.route('/realxtalk/visionflow')
+def visionflow():
     return render_template('ai_index.html',project=project_name)
-@app.route('/chat_ai', methods=['GET', 'POST'])
-def chat_ai():
+@app.route('/realxtalk/visionflow/ai', methods=['GET', 'POST'])
+def ai():
     # apikey='Your API key here'
-    with open("apikey.txt",'r') as file:
+    with open(".gitignore\\apikey.txt",'r') as file:
         apikey=file.read()
     genai.configure(api_key=apikey)
     model = genai.GenerativeModel('gemini-pro')
@@ -182,7 +199,7 @@ def chat_ai():
         return jsonify(markdown(gemini_response))
     else:
         return render_template("chats.html",project=project_name)
-@app.route('/message', methods=['GET'])
+@app.route('/realxtalk/message')
 def message():
     return render_template('messager.html',project=project_name)
 @app.route('/check-file/<filename>', methods=['GET'])
@@ -368,22 +385,8 @@ def second_last_line():
         return jsonify(second_last_line=second_last_line)
     else:
         return jsonify(error="File not found"), 404
-@app.route('/checkdata', methods=['POST'])
-def checkdata():
-    fname= request.form['fname']
-    lname= request.form['lname']
-    email= request.form['email']
-    password= request.form['password']
-    verify_value=data_check_into_database(fname,lname,email,password)
-    if verify_value=="t":
-        find_user_name=get_user_info(email,password,fname,lname)
-        return render_template('home.html',result=find_user_name,project=project_name)
-    elif verify_value=="f":
-        return render_template('login.html', result="Wrong email or password...",project=project_name)
-    else:
-        return render_template('login.html', result=verify_value,project=project_name)
-@app.route('/feedback')
-def feedback():
+@app.route('/realxtalk/visionflow/expressivereact')
+def expressivereact():
     return render_template('feedback.html',project=project_name)
 def get_file_count(folder):
     return len([name for name in os.listdir(folder) if os.path.isfile(os.path.join(folder, name))])

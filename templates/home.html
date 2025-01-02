@@ -7,15 +7,19 @@
         <title>{{ project}}</title>
         <link rel="stylesheet" href="{{url_for('static',filename='css/all.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+        <link rel="icon" type="image/jpeg" href="{{url_for('static',filename='main_images/real4.png')}}">
     </head>
-<link rel="icon" type="image/png" href="{{url_for('static',filename='main_images/homeicon.png')}}">
 <body>
 <div class="loader" id="loading"></div>
 <div class="wrapper" id="wrapper">
     <section class="users">
     <header>    
     <div class="content">
-        <img src= "{{ result[1] }}" alt="userphoto">
+        <div class="profile-container" id="profileContainer">
+            <img src="{{ result[1] }}" alt="Profile Picture" class="profile-picture">
+            <div class="decoration-ring"></div>
+            <div class="status-dot"></div>
+        </div>
         <div class="details">
             <div class="username" id="mainusername"> {{ result[0] }} </div>
             <input type="hidden" name="hid" id="hid" value="{{ result[4] }}">
@@ -23,7 +27,8 @@
         </div>
     </div>
     
-    <form action="/logout" method="post"><a href="{{ url_for('ai') }}"><img src="{{url_for('static',filename='main_images/aiicon.png')}}" id="ai" alt="ai"></a><input type="submit" value="Logout" onclick="logout()"></form>
+    <form action="/logout" method="post"><a href="{{ url_for('visionflow') }}"><img src="{{url_for('static',filename='main_images/ai.png')}}" id="ai" alt="ai"></a>
+        <button class="button1" onclick="logout()">LOGOUT</button> </form>
 </header><br>
 <div class="search">
     <label id="label">Select an user to start chat</label><input type="text" name="a" id="searchInput" autocomplete="off" placeholder="Enter name to search..."><i class="fa-solid fa-search" onclick="inputshow()" id="search"></i><i class="fa-solid fa-times" onclick="notinputshow()" id="cross"></i>
