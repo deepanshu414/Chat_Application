@@ -102,7 +102,7 @@ body{
 }
 div.container header{
     display: flex;
-    background-color: #0077b6;;
+    background-color: #236072;
     color: white;
     padding:25px 30px;
     font-size: 25px;
@@ -133,7 +133,7 @@ div#chat_options p{
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: 0.7px solid rgba(255, 255, 255, 0.511);
-    background-color: #0077b6;;
+    background-color: #236072;
 }
 div#query_area{
     display: flex;
@@ -207,7 +207,7 @@ div.chats{
 }
 .chats{
     position: relative;
-    height: 300px;
+    height: 250px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
