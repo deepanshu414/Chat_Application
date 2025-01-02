@@ -385,7 +385,7 @@ def second_last_line():
         return jsonify(second_last_line=second_last_line)
     else:
         return jsonify(error="File not found"), 404
-@app.route('/realxtalk/visionflow/expressivereact')
+@app.route(f'/{project_name}/visionflow/expressivereact')
 def expressivereact():
     return render_template('feedback.html',project=project_name)
 def get_file_count(folder):
