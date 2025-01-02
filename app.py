@@ -415,5 +415,5 @@ def ser_file(filename):
     return send_from_directory('log_file/read_files', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0', port=5001)
-    # webview.start()
+    # app.run(debug=True,host='0.0.0.0', port=5001)
+    webview.start()
