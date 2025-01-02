@@ -167,10 +167,10 @@ def realxtalk():
             return render_template('index.html',result="Error: Storing data",project=project_name) 
     except Exception as e:
         return render_template('index.html',result="Error: " + str(e),project=project_name) 
-@app.route('/realxtalk/visionflow')
+@app.route(f'/{project_name}/visionflow')
 def visionflow():
     return render_template('ai_index.html',project=project_name)
-@app.route('/realxtalk/visionflow/ai', methods=['GET', 'POST'])
+@app.route(f'/{project_name}/visionflow/ai', methods=['GET', 'POST'])
 def ai():
     # apikey='Your API key here'
     with open(".gitignore\\apikey.txt",'r') as file:
