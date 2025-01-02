@@ -289,6 +289,8 @@ To keep your forked repository up to date with the original repository, follow t
 │   │   ├── load.js
 │   │   └── message.js
 │   ├── main_images
+│   │   ├── ai.png
+│   │   ├── ai1.png
 │   │   ├── aiicon.png
 │   │   ├── backarrow.png
 │   │   ├── flask_gem_avatar.png
@@ -296,8 +298,15 @@ To keep your forked repository up to date with the original repository, follow t
 │   │   ├── homeicon.png
 │   │   ├── indexicon.png
 │   │   ├── loginicon.png
+│   │   ├── person.png
+│   │   ├── person1.png
 │   │   ├── person_avatar.png
 │   │   ├── pexels-pixabay-326055.jpg
+│   │   ├── real1.png
+│   │   ├── real2.png
+│   │   ├── real3.png
+│   │   ├── real4.png
+│   │   ├── real5.png
 │   │   ├── robot.webp
 │   │   └── visionhome.webp
 │   ├── project_name.txt
