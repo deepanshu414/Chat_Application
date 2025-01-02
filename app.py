@@ -106,7 +106,7 @@ def login():
 @app.route('/logout', methods=['POST'])
 def logout():
     return render_template('index.html',project=project_name)
-@app.route('/realxtalk', methods=['POST'])
+@app.route(f'/{project_name}', methods=['POST'])
 def realxtalk():
     valuecheck=request.form['valuecheck']
     try:
