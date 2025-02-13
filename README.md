@@ -319,14 +319,15 @@ To keep your forked repository up to date with the original repository, follow t
 │       ├── fa-solid-900.woff2
 │       ├── fa-v4compatibility.ttf
 │       └── fa-v4compatibility.woff2
-└── templates
-    ├── ai_index.html
-    ├── chats.html
-    ├── feedback.html
-    ├── home.html
-    ├── index.html
-    ├── login.html
-    └── messager.html
+├── templates
+│   ├── ai_index.html
+│   ├── chats.html
+│   ├── feedback.html
+│   ├── home.html
+│   ├── index.html
+│   ├── login.html
+│   └── messager.html
+└── vercel.json
 ```
 <!-- END_STRUCTURE -->
     
